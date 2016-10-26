@@ -1,21 +1,31 @@
-import com.company.FormatException;
-import com.company.Formatter;
-import com.company.IFormatter;
+package com.company;
+
 import com.company.destination.IDestination;
 import com.company.destination.StringDestination;
 import com.company.source.ISource;
 import com.company.source.StringSource;
 
-public class Main {
-
-    public static void main(String[] args) {
+/**
+ *Launches formatter.
+ */
+public final class Main {
+    /**
+     * Private constructor.
+     */
+    private Main() {
+    //not called
+    }
+    /**
+     * Takes code and formats it.
+     * @param args  command line argument
+     */
+    public static void main(final String[] args) {
         //инициализируем источник
         ISource source = new StringSource("hjghdfg {d;d{f;}g}h;");
         //инициализируем приемник
         IDestination destination = new StringDestination();
         // инициализируем класс форматирования
         IFormatter formatter = new Formatter();
-        // вызываем метод форматирования с параметрами: файл-источник и файл-приемник
         try {
             formatter.format(source, destination);
         } catch (FormatException e) {

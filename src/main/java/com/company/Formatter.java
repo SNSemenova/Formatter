@@ -4,23 +4,27 @@ import com.company.destination.IDestination;
 import com.company.source.ISource;
 import com.company.source.ReadException;
 
-
+/**
+ * Formats code.
+ */
 public class Formatter implements IFormatter {
     @Override
-    public void format(ISource source, IDestination destination) throws FormatException {
+    public final void format(final ISource source,
+                             final IDestination destination)
+            throws FormatException {
         int level = 0;
         char previous = 0;
-
-        while(source.hasNext()){
+        while (source.hasNext()) {
             try {
                 char symbol = source.read();
-                switch(symbol) {
+                switch (symbol) {
                     case '{':
                         destination.write(symbol);
                         level++;
                         destination.write('\n');
-                        for(int i = 0; i < level; i++)
-                        destination.write("    ");
+                        for (int i = 0; i < level; i++) {
+                            destination.write("    ");
+                        }
                         previous = symbol;
                         break;
                     case '}':
@@ -28,7 +32,7 @@ public class Formatter implements IFormatter {
                             destination.write('\n');
                         }
                         level--;
-                        for(int i = 0; i < level; i++) {
+                        for (int i = 0; i < level; i++) {
                             destination.write("    ");
                         }
                         destination.write(symbol);
@@ -42,7 +46,7 @@ public class Formatter implements IFormatter {
                         break;
                     default:
                         if (previous == ';' || previous == '}') {
-                            for(int i = 0; i < level; i++){
+                            for (int i = 0; i < level; i++) {
                                 destination.write("    ");
                             }
                         }

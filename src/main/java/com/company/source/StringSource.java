@@ -1,21 +1,32 @@
 package com.company.source;
-
+/**
+ * Implements ISource with string.
+ */
 public class StringSource implements ISource {
-
-    private String source;
+    /**
+     * The string of source.
+     */
+    private String source = null;
+    /**
+     * Number of current symbol.
+     */
     private int current = 0;
 
-    public StringSource(String source) {
-        this.source = source;
+    /**
+     * Takes string from the source.
+     * @param src code for formatting
+     */
+    public StringSource(final String src) {
+        this.source = src;
     }
 
     @Override
-    public boolean hasNext() {
+    public final boolean hasNext() {
         return (this.current < this.source.length());
     }
 
     @Override
-    public char read() throws ReadException {
+    public final char read() throws ReadException {
         try {
             return this.source.charAt(this.current++);
         } catch (Exception e) {

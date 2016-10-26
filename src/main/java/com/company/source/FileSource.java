@@ -1,20 +1,23 @@
 package com.company.source;
 
 /**
- * Implements ISource with char file
+ * Implements ISource with char file.
  */
 public class FileSource implements ISource {
-
-    public FileSource(String fileName) {
+    /**
+     * Creates a new object.
+     * @param fileName name of file
+     */
+    public FileSource(final String fileName) {
     }
 
     @Override
-    public boolean hasNext() {
+    public final boolean hasNext() {
         return false;
     }
 
     @Override
-    public char read() {
+    public final char read() {
         return ' ';
     }
 

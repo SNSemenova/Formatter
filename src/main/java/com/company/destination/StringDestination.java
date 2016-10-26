@@ -1,23 +1,38 @@
 package com.company.destination;
 
+/**
+ * Class for working with string in
+ * which the result will be recorded.
+ */
 public class StringDestination implements IDestination {
-
+    /**
+     * Creates a new object.
+     */
     private StringBuilder destination = new StringBuilder();
 
-    public void write(String string) {
+    /**
+     * Writes string of result to the string.
+     * @param string string of result for recording
+     */
+    public final void write(final String string) {
         this.destination.append(string);
     }
-
-    public void write(char symbol) {
+    /**
+     * Writes symbol of result to the string.
+     * @param symbol symbol for recording to the string
+     */
+    public final void write(final char symbol) {
         this.destination.append(symbol);
     }
-
+    /**
+     * Closes destination.
+     */
     public void close() {
 
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return this.destination.toString();
     }
 }
