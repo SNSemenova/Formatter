@@ -10,7 +10,7 @@ import com.company.source.StringSource;
  */
 public final class Main {
     /**
-     * Private constructor.
+     * Phrivate constructor.
      */
     private Main() {
     //not called

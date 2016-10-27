@@ -1,0 +1,5 @@
+My algorithm complexity:
+by operations - O(N) + C
+	(cycle while)
+by memory - O(N) + C
+	(source and destination)
