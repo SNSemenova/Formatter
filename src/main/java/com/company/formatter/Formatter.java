@@ -1,8 +1,7 @@
-package com.company;
+package com.company.formatter;
 
 import com.company.destination.IDestination;
 import com.company.source.ISource;
-import com.company.source.ReadException;
 
 /**
  * Formats code.
@@ -10,16 +9,15 @@ import com.company.source.ReadException;
 public class Formatter implements IFormatter {
     @Override
     public final void format(final ISource source,
-                             final IDestination destination)
-            throws FormatException {
+                             final IDestination destination) {
         int level = 0;
         char previous = 0;
         while (source.hasNext()) {
-            try {
-                char symbol = source.read();
+            char symbol = 0;
+                symbol = source.read();
                 switch (symbol) {
                     case '{':
-                        destination.write(symbol);
+                        destination.write(" " + symbol);
                         level++;
                         destination.write('\n');
                         for (int i = 0; i < level; i++) {
@@ -28,7 +26,7 @@ public class Formatter implements IFormatter {
                         previous = symbol;
                         break;
                     case '}':
-                        if (previous != ';') {
+                        if (previous != ';' && previous != '}') {
                             destination.write('\n');
                         }
                         level--;
@@ -53,9 +51,6 @@ public class Formatter implements IFormatter {
                         destination.write(symbol);
                         previous = symbol;
                 }
-            } catch (ReadException e) {
-                throw new FormatException(e);
-            }
         }
     }
 }

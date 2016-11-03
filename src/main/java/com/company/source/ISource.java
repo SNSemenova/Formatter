@@ -15,9 +15,8 @@ public interface ISource {
     /**
      * Returns next symbol if exists.
      * @return next symbol
-     * @throws ReadException when next symbol can't be read
      */
-    char read() throws ReadException;
+    char read();
 
     /**
      * Closes a com.company.source.

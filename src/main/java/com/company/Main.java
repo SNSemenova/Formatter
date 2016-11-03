@@ -1,41 +1,39 @@
 package com.company;
 
+import com.company.destination.FileDestination;
 import com.company.destination.IDestination;
-import com.company.destination.StringDestination;
+import com.company.formatter.Formatter;
+import com.company.formatter.IFormatter;
+import com.company.source.FileSource;
 import com.company.source.ISource;
-import com.company.source.StringSource;
+
+import java.io.FileNotFoundException;
 
 /**
  *Launches formatter.
  */
 public final class Main {
     /**
-     * Phrivate constructor.
+     * Private constructor.
      */
     private Main() {
-    //not called
+        //not called
     }
     /**
      * Takes code and formats it.
      * @param args  command line argument
      */
     public static void main(final String[] args) {
-        //инициализируем источник
-        ISource source = new StringSource("hjghdfg {d;d{f;}g}h;");
-        //инициализируем приемник
-        IDestination destination = new StringDestination();
-        // инициализируем класс форматирования
-        IFormatter formatter = new Formatter();
+        ISource source = new FileSource(args[0]);
+        IDestination destination = null;
         try {
-            formatter.format(source, destination);
-        } catch (FormatException e) {
+            destination = new FileDestination(args[1]);
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        //закрываем файл-источник
+        IFormatter formatter = new Formatter();
+        formatter.format(source, destination);
         source.close();
-        //закрываем файл-приемник
         destination.close();
-        System.out.println(destination.toString());
-        // "hjghdfg {\n    d;\n    d{\n        f;\n}\n     g\n}h;"
     }
 }
