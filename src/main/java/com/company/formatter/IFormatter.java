@@ -12,5 +12,5 @@ public interface IFormatter {
      * @param source source of code
      * @param destination where the result will be recorded
      */
-    void format(ISource source, IDestination destination);
+    void format(ISource source, IDestination destination) throws FormatException;
 }

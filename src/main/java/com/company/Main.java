@@ -2,10 +2,12 @@ package com.company;
 
 import com.company.destination.FileDestination;
 import com.company.destination.IDestination;
+import com.company.formatter.FormatException;
 import com.company.formatter.Formatter;
 import com.company.formatter.IFormatter;
 import com.company.source.FileSource;
 import com.company.source.ISource;
+import com.company.source.ReadException;
 
 import java.io.FileNotFoundException;
 
@@ -23,7 +25,7 @@ public final class Main {
      * Takes code and formats it.
      * @param args  command line argument
      */
-    public static void main(final String[] args) {
+    public static void main(final String[] args) throws FormatException, ReadException {
         ISource source = new FileSource(args[0]);
         IDestination destination = null;
         try {

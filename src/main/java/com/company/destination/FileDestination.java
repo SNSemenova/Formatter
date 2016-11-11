@@ -22,9 +22,6 @@ public class FileDestination implements IDestination {
         file = new File(fileName);
 
         try {
-            if (!file.exists()) {
-                file.createNewFile();
-            }
             writer = new FileWriter(file.getAbsoluteFile());
         } catch (IOException e) {
             e.printStackTrace();

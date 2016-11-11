@@ -22,7 +22,7 @@ public class FileFormatterTest {
     }
 
     @Test
-    public void testFile() {
+    public void testFile() throws FormatException {
         ISource source = new FileSource("source.txt");
         IDestination destination = null;
         try {

@@ -7,8 +7,8 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 /**
-     * Test for class Formatter
-     */
+ * Test for class Formatter
+ */
     public class FormatterTest {
 
         private IFormatter formatter;
@@ -19,11 +19,11 @@ import static org.junit.Assert.assertEquals;
         }
 
         @Test
-        public void testString() {
+        public void testString() throws FormatException {
             ISource source = new StringSource("a{qwer{ty;}}");
             IDestination destination = new StringDestination();
             formatter.format(source, destination);
-            assertEquals("a {\n    qwer {\n        ty;\n    }\n}\n",
+            assertEquals("a{\n    qwer{\n        ty;\n    }\n}\n",
                     destination.toString());
         }
     }

@@ -1,6 +1,8 @@
 import com.company.Main;
 import com.company.destination.IDestination;
 import com.company.destination.StringDestination;
+import com.company.formatter.FormatException;
+import com.company.source.ReadException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +21,7 @@ public class MainTest {
         IDestination destination = new StringDestination();
     }
     @Test
-    public void testMain() throws FileNotFoundException {
+    public void testMain() throws FileNotFoundException, FormatException, ReadException {
         Main.main(new String[]{"source.txt", "destination.txt"});
         File file = new File("destination.txt");
         assertTrue(file.length() != 0);

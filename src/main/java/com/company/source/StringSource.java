@@ -26,8 +26,12 @@ public class StringSource implements ISource {
     }
 
     @Override
-    public final char read() {
-        return this.source.charAt(this.current++);
+    public final char read() throws ReadException {
+        try {
+            return this.source.charAt(this.current++);
+        } catch (Exception e) {
+            throw new ReadException(e);
+        }
     }
 
     @Override

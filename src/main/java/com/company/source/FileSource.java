@@ -43,8 +43,12 @@ public class FileSource implements ISource {
 
 
     @Override
-    public final char read() {
-        return ((char)current);
+    public final char read() throws ReadException {
+        try {
+            return ((char) current);
+        } catch (Exception e) {
+            throw new ReadException(e);
+        }
     }
 
     @Override
