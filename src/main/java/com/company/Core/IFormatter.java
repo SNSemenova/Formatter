@@ -1,7 +1,4 @@
-package com.company.formatter;
-
-import com.company.destination.IDestination;
-import com.company.source.ISource;
+package com.company.Core;
 
 /**
 * Interface for code formatting.

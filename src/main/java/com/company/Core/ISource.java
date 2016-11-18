@@ -1,7 +1,7 @@
-package com.company.source;
+package com.company.Core;
 
 /**
- * Provides a com.company.source of symbols.
+ * Interface of source for formatter.
  */
 public interface ISource {
     /**

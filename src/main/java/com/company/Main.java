@@ -1,13 +1,13 @@
 package com.company;
 
-import com.company.destination.FileDestination;
-import com.company.destination.IDestination;
-import com.company.formatter.FormatException;
-import com.company.formatter.Formatter;
-import com.company.formatter.IFormatter;
-import com.company.source.FileSource;
-import com.company.source.ISource;
-import com.company.source.ReadException;
+import com.company.FileIO.FileDestination;
+import com.company.Core.IDestination;
+import com.company.Core.FormatException;
+import com.company.FormatterImpl.Formatter;
+import com.company.Core.IFormatter;
+import com.company.FileIO.FileSource;
+import com.company.Core.ISource;
+import com.company.Core.ReadException;
 
 import java.io.FileNotFoundException;
 

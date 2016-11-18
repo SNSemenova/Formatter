@@ -1,4 +1,4 @@
-package com.company.formatter;
+package com.company.Core;
 
 /**
  * Throws exceptions associated with the format.

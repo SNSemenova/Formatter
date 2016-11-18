@@ -1,6 +1,12 @@
-import com.company.destination.*;
-import com.company.formatter.*;
-import com.company.source.*;
+package FileIO;
+
+import com.company.Core.FormatException;
+import com.company.Core.IDestination;
+import com.company.Core.IFormatter;
+import com.company.Core.ISource;
+import com.company.FileIO.FileDestination;
+import com.company.FileIO.FileSource;
+import com.company.FormatterImpl.Formatter;
 import org.junit.Before;
 import org.junit.Test;
 

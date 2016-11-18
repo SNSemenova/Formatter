@@ -1,4 +1,4 @@
-package com.company.source;
+package com.company.Core;
 
 /**
  * Throws exceptions associated with the reading.

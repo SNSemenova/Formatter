@@ -1,4 +1,7 @@
-package com.company.source;
+package com.company.FileIO;
+
+import com.company.Core.ISource;
+import com.company.Core.ReadException;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;

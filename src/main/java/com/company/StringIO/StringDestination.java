@@ -1,4 +1,6 @@
-package com.company.destination;
+package com.company.StringIO;
+
+import com.company.Core.IDestination;
 
 /**
  * Class for working with string in

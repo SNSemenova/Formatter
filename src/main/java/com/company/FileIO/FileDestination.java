@@ -1,4 +1,6 @@
-package com.company.destination;
+package com.company.FileIO;
+
+import com.company.Core.IDestination;
 
 import java.io.File;
 import java.io.FileNotFoundException;

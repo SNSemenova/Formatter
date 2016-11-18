@@ -1,8 +1,8 @@
 import com.company.Main;
-import com.company.destination.IDestination;
-import com.company.destination.StringDestination;
-import com.company.formatter.FormatException;
-import com.company.source.ReadException;
+import com.company.Core.IDestination;
+import com.company.StringIO.StringDestination;
+import com.company.Core.FormatException;
+import com.company.Core.ReadException;
 import org.junit.Before;
 import org.junit.Test;
 

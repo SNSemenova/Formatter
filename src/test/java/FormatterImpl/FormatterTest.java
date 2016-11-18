@@ -1,6 +1,12 @@
-import com.company.formatter.*;
-import com.company.destination.*;
-import com.company.source.*;
+package FormatterImpl;
+
+import com.company.Core.FormatException;
+import com.company.Core.IDestination;
+import com.company.Core.IFormatter;
+import com.company.Core.ISource;
+import com.company.FormatterImpl.Formatter;
+import com.company.StringIO.StringDestination;
+import com.company.StringIO.StringSource;
 import org.junit.Before;
 import org.junit.Test;
 
