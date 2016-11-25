@@ -1,3 +1,4 @@
+import com.company.Core.WriteException;
 import com.company.Main;
 import com.company.Core.IDestination;
 import com.company.StringIO.StringDestination;
@@ -21,7 +22,7 @@ public class MainTest {
         IDestination destination = new StringDestination();
     }
     @Test
-    public void testMain() throws FileNotFoundException, FormatException, ReadException {
+    public void testMain() throws FileNotFoundException, FormatException, ReadException, WriteException {
         Main.main(new String[]{"source.txt", "destination.txt"});
         File file = new File("destination.txt");
         assertTrue(file.length() != 0);

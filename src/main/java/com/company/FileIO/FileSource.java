@@ -12,35 +12,37 @@ import java.io.IOException;
  */
 public class FileSource implements ISource {
 
+    /**
+     * Reader for file.
+     */
     private FileReader reader;
 
+    /**
+     * Current symbol of file.
+     */
     private int current = 0;
 
     /**
      * Creates a new object.
-     *
      * @param fileName name of file
+     * @throws ReadException when reader can't be initialized
      */
-    public FileSource(final String fileName) {
+    public FileSource(final String fileName) throws ReadException {
         try {
             reader = new FileReader(fileName);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new ReadException(e);
         }
     }
 
     @Override
-    public final boolean hasNext() {
+    public final boolean hasNext() throws ReadException {
         try {
-            if ((this.current = this.reader.read()) != -1) {
-                return true;
-            } else {
-                return false;
-            }
+            this.current = this.reader.read();
+            return (this.current) != -1;
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ReadException(e);
         }
-        return false;
     }
 
 
@@ -55,11 +57,11 @@ public class FileSource implements ISource {
     }
 
     @Override
-    public void close() {
+    public final void close() throws ReadException {
         try {
             reader.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ReadException(e);
         }
     }
 }

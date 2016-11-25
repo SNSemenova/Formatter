@@ -1,6 +1,7 @@
 package com.company.FormatterImpl.Commands;
 
 import com.company.Core.IDestination;
+import com.company.Core.WriteException;
 import com.company.FormatterImpl.ICommand;
 import com.company.FormatterImpl.State;
 
@@ -9,11 +10,11 @@ import com.company.FormatterImpl.State;
  */
 public class LineBreakCommand implements ICommand {
     @Override
-    public void execute(IDestination destination, char symbol,
-                        State state) {
-        if (state.getPrevious() != ';' && state.getPrevious() != '}' && state.getPrevious() != '{') {
+    public final void execute(final IDestination destination, final char symbol,
+                        final State state) throws WriteException {
+        if (state.getPrevious() != ';' && state.getPrevious() != '}'
+                && state.getPrevious() != '{') {
             destination.write(symbol);
         }
-        state.setLineComment(false);
     }
 }

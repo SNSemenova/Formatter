@@ -1,6 +1,7 @@
 package com.company.FormatterImpl.Commands;
 
 import com.company.Core.IDestination;
+import com.company.Core.WriteException;
 import com.company.FormatterImpl.ICommand;
 import com.company.FormatterImpl.State;
 
@@ -9,13 +10,10 @@ import com.company.FormatterImpl.State;
  */
 public class SemicolonCommand implements ICommand {
     @Override
-    public void execute(IDestination destination, char symbol,
-                        State state) {
+    public final void execute(final IDestination destination, final char symbol,
+                        final State state) throws WriteException {
         destination.write(symbol);
-        if (!state.isMultiLineComment() &&
-                !state.isLineComment()) {
-            destination.write('\n');
-            state.setPrevious(symbol);
-        }
+        destination.write('\n');
+        state.setPrevious(symbol);
     }
 }

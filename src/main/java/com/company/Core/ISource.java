@@ -9,8 +9,9 @@ public interface ISource {
      * and <code>false</code> otherwise.
      * @return <code>true</code> if the next symbol exists
      * and <code>false</code> otherwise
+     * @throws ReadException when the source can't be read
      */
-    boolean hasNext();
+    boolean hasNext() throws ReadException;
 
     /**
      * Returns next symbol if exists.
@@ -21,6 +22,7 @@ public interface ISource {
 
     /**
      * Closes a com.company.source.
+     * @throws ReadException when the source can't be closed
      */
-    void close();
+    void close() throws ReadException;
 }

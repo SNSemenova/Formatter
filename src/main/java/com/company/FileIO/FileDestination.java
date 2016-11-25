@@ -1,9 +1,9 @@
 package com.company.FileIO;
 
 import com.company.Core.IDestination;
+import com.company.Core.WriteException;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -12,21 +12,27 @@ import java.io.IOException;
  * which the result will be recorded.
  */
 public class FileDestination implements IDestination {
+    /**
+     * Writer to the file.
+     */
     private FileWriter writer;
+    /**
+     * The file.
+     */
     private File file;
 
     /**
      * Method creates an instance of the class.
      *
      * @param fileName name of file
+     * @throws WriteException when FileWriter can't be created
      */
-    public FileDestination(final String fileName) throws FileNotFoundException {
+    public FileDestination(final String fileName) throws WriteException {
         file = new File(fileName);
-
         try {
             writer = new FileWriter(file.getAbsoluteFile());
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new WriteException(e);
         }
     }
 
@@ -34,12 +40,13 @@ public class FileDestination implements IDestination {
      * Writes string of result to the file.
      *
      * @param string string of result for recording
+     * @throws WriteException when the string can't be written
      */
-    public void write(final String string) {
+    public final void write(final String string) throws WriteException {
         try {
             writer.write(string);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new WriteException("Error of writing of string", e);
         }
     }
 
@@ -47,23 +54,25 @@ public class FileDestination implements IDestination {
      * Writes symbol of result to the file.
      *
      * @param symbol symbol for recording to the file
+     * @throws WriteException when the symbol can't be written
      */
-    public void write(final char symbol) {
+    public final void write(final char symbol) throws WriteException {
         try {
             writer.write(symbol);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new WriteException("Error of writing of char", e);
         }
     }
 
     /**
      * Closes the file.
+     * @throws WriteException when the file can't be closed
      */
-    public void close() {
+    public final void close() throws WriteException {
         try {
             writer.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new WriteException("Error of closing", e);
         }
     }
 }

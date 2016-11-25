@@ -1,6 +1,12 @@
 package com.company.FormatterImpl;
 
-import com.company.Core.*;
+
+import com.company.Core.FormatException;
+import com.company.Core.IDestination;
+import com.company.Core.IFormatter;
+import com.company.Core.ISource;
+import com.company.Core.WriteException;
+import com.company.Core.ReadException;
 
 /**
  * Formats code.
@@ -8,18 +14,27 @@ import com.company.Core.*;
 public class Formatter implements IFormatter {
     @Override
     public final void format(final ISource source,
-                             final IDestination destination) throws FormatException {
+                             final IDestination destination)
+            throws FormatException {
         State state = new State();
-        while (source.hasNext()) {
-            char symbol = 0;
-            try {
-                symbol = source.read();
-            } catch (ReadException e) {
-                e.printStackTrace();
+        try {
+            while (source.hasNext()) {
+                char symbol = 0;
+                try {
+                    symbol = source.read();
+                } catch (ReadException e) {
+                    throw new FormatException(e);
+                }
+                CommandStore options = new CommandStore();
+                ICommand command =
+                        options.getCommand(state.getCurrentState(), symbol);
+                command.execute(destination, symbol, state);
+                state.updateState(symbol);
             }
-            CommandStore commandStore = new CommandStore();
-            ICommand command = commandStore.getCommand(symbol);
-            command.execute(destination, symbol, state);
+        } catch (ReadException e) {
+            throw new FormatException(e);
+        } catch (WriteException e) {
+            throw new FormatException(e);
         }
     }
 }

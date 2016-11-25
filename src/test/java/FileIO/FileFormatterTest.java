@@ -1,9 +1,6 @@
 package FileIO;
 
-import com.company.Core.FormatException;
-import com.company.Core.IDestination;
-import com.company.Core.IFormatter;
-import com.company.Core.ISource;
+import com.company.Core.*;
 import com.company.FileIO.FileDestination;
 import com.company.FileIO.FileSource;
 import com.company.FormatterImpl.Formatter;
@@ -11,7 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 
 import static org.junit.Assert.assertTrue;
 
@@ -28,16 +24,25 @@ public class FileFormatterTest {
     }
 
     @Test
-    public void testFile() throws FormatException {
-        ISource source = new FileSource("source.txt");
+    public void testFile() throws FormatException, WriteException {
+        ISource source = null;
+        try {
+            source = new FileSource("source.txt");
+        } catch (ReadException e) {
+            throw new FormatException(e);
+        }
         IDestination destination = null;
         try {
             destination = new FileDestination("destination.txt");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (WriteException e) {
+            throw new WriteException(e);
         }
         formatter.format(source, destination);
-        source.close();
+        try {
+            source.close();
+        } catch (ReadException e) {
+            throw new FormatException(e);
+        }
         destination.close();
         File file = new File("destination.txt");
         assertTrue(file.length() != 0);
