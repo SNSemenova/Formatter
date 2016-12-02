@@ -32,10 +32,10 @@ public class FormatterTest {
 
     @Test
     public void bracketsFormat() throws FormatException, WriteException {
-        ISource source = new StringSource("{{a}}");
+        ISource source = new StringSource("{f{a}}");
         IDestination destination = new StringDestination();
         formatter.format(source, destination);
-        assertEquals("{\n    {\n        a\n    }\n}\n",
+        assertEquals("{\n    f{\n        a\n    }\n}\n",
                 destination.toString());
     }
 
@@ -54,6 +54,15 @@ public class FormatterTest {
         IDestination destination = new StringDestination();
         formatter.format(source, destination);
         assertEquals(";\n;\n",
+                destination.toString());
+    }
+
+    @Test
+    public void lineBreakFormat() throws FormatException {
+        ISource source = new StringSource("\n}\n");
+        IDestination destination = new StringDestination();
+        formatter.format(source, destination);
+        assertEquals("\n}\n",
                 destination.toString());
     }
 }

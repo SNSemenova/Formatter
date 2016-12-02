@@ -16,9 +16,5 @@ public class OpenBracketCommand implements ICommand {
             destination.write(symbol);
             state.incrementLevel();
             destination.write('\n');
-            for (int i = 0; i < state.getLevel(); i++) {
-                destination.write("    ");
-            }
-            state.setPrevious(symbol);
     }
 }

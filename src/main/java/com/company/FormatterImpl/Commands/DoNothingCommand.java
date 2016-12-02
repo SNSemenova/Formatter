@@ -8,13 +8,10 @@ import com.company.FormatterImpl.State;
 /**
  * Implementation for interface ICommand.
  */
-public class LineBreakCommand implements ICommand {
+public class DoNothingCommand implements ICommand {
     @Override
     public final void execute(final IDestination destination, final char symbol,
                         final State state) throws WriteException {
-        if (state.getPrevious() != ';' && state.getPrevious() != '}'
-                && state.getPrevious() != '{') {
-            destination.write(symbol);
-        }
+
     }
 }

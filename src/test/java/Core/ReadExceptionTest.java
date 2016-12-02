@@ -20,10 +20,6 @@ public class ReadExceptionTest {
     @Test(expected = ReadException.class)
     public void testString() throws ReadException {
         char symbol = 0;
-        try {
-            symbol = source.read();
-        } catch (Exception e) {
-            throw new ReadException(e);
-        }
+        symbol = source.read();
     }
 }

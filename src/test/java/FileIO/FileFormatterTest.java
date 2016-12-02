@@ -24,25 +24,13 @@ public class FileFormatterTest {
     }
 
     @Test
-    public void testFile() throws FormatException, WriteException {
+    public void testFile() throws ReadException, WriteException, FormatException {
         ISource source = null;
-        try {
-            source = new FileSource("source.txt");
-        } catch (ReadException e) {
-            throw new FormatException(e);
-        }
+        source = new FileSource("source.txt");
         IDestination destination = null;
-        try {
-            destination = new FileDestination("destination.txt");
-        } catch (WriteException e) {
-            throw new WriteException(e);
-        }
+        destination = new FileDestination("destination.txt");
         formatter.format(source, destination);
-        try {
-            source.close();
-        } catch (ReadException e) {
-            throw new FormatException(e);
-        }
+        source.close();
         destination.close();
         File file = new File("destination.txt");
         assertTrue(file.length() != 0);

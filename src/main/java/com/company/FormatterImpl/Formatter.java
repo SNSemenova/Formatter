@@ -17,15 +17,11 @@ public class Formatter implements IFormatter {
                              final IDestination destination)
             throws FormatException {
         State state = new State();
+        CommandStore options = new CommandStore();
         try {
             while (source.hasNext()) {
                 char symbol = 0;
-                try {
-                    symbol = source.read();
-                } catch (ReadException e) {
-                    throw new FormatException(e);
-                }
-                CommandStore options = new CommandStore();
+                symbol = source.read();
                 ICommand command =
                         options.getCommand(state.getCurrentState(), symbol);
                 command.execute(destination, symbol, state);

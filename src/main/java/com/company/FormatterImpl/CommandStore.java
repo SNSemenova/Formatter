@@ -3,9 +3,11 @@ package com.company.FormatterImpl;
 
 import com.company.FormatterImpl.Commands.CloseBracketCommand;
 import com.company.FormatterImpl.Commands.DefaultCommand;
-import com.company.FormatterImpl.Commands.LineBreakCommand;
 import com.company.FormatterImpl.Commands.OpenBracketCommand;
 import com.company.FormatterImpl.Commands.SemicolonCommand;
+import com.company.FormatterImpl.Commands.NewLineCloseBracketCommand;
+import com.company.FormatterImpl.Commands.DoNothingCommand;
+import com.company.FormatterImpl.Commands.NewLineCommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +17,39 @@ import java.util.Map;
  */
 public class CommandStore {
     /**
+     * Map for handlers.
+     */
+    private Map<String, ICommand> map;
+
+    /**
+     * Creates the map.
+     */
+    public CommandStore() {
+        this.map = new HashMap<String, ICommand>();
+        this.map.put("{default", new OpenBracketCommand());
+        this.map.put("{afterAsterisk", new OpenBracketCommand());
+        this.map.put("{afterSlash", new OpenBracketCommand());
+        this.map.put("{lineComment", new DefaultCommand());
+        this.map.put("{multiLineComment", new DefaultCommand());
+        this.map.put("{string", new DefaultCommand());
+        this.map.put("}afterAsterisk", new CloseBracketCommand());
+        this.map.put("}afterSlash", new CloseBracketCommand());
+        this.map.put("}default", new CloseBracketCommand());
+        this.map.put("}lineComment", new DefaultCommand());
+        this.map.put("}multiLineComment", new DefaultCommand());
+        this.map.put("}string", new DefaultCommand());
+        this.map.put(";afterAsterisk", new SemicolonCommand());
+        this.map.put(";afterSlash", new SemicolonCommand());
+        this.map.put(";default", new SemicolonCommand());
+        this.map.put(";lineComment", new DefaultCommand());
+        this.map.put(";multiLineComment", new DefaultCommand());
+        this.map.put(";string", new DefaultCommand());
+        this.map.put("}newLineDone", new NewLineCloseBracketCommand());
+        this.map.put(";newLineDone", new SemicolonCommand());
+        this.map.put("\nnewLineDone", new DoNothingCommand());
+    }
+
+    /**
      * Method for getting current handler.
      * @param currentState current state of formatter
      * @param symbol symbol for formatting
@@ -22,33 +57,13 @@ public class CommandStore {
      */
     public final ICommand getCommand(final String currentState,
                                      final char symbol) {
-
-        Map<String, ICommand> map = new HashMap<String, ICommand>();
-        map.put("{default", new OpenBracketCommand());
-        map.put("{afterAsterisk", new OpenBracketCommand());
-        map.put("{afterSlash", new OpenBracketCommand());
-        map.put("{lineComment", new DefaultCommand());
-        map.put("{multiLineComment", new DefaultCommand());
-        map.put("}afterAsterisk", new CloseBracketCommand());
-        map.put("}afterSlash", new CloseBracketCommand());
-        map.put("}default", new CloseBracketCommand());
-        map.put("}lineComment", new DefaultCommand());
-        map.put("}multiLineComment", new DefaultCommand());
-        map.put(";afterAsterisk", new SemicolonCommand());
-        map.put(";afterSlash", new SemicolonCommand());
-        map.put(";default", new SemicolonCommand());
-        map.put(";lineComment", new DefaultCommand());
-        map.put(";multiLineComment", new DefaultCommand());
-        map.put("\nlineComment", new LineBreakCommand());
-        map.put("\nmultiLineComment", new LineBreakCommand());
-        map.put("\nafterAsterisk", new LineBreakCommand());
-        map.put("\nafterSlash", new LineBreakCommand());
-        map.put("\ndefault", new LineBreakCommand());
-
         String neededKey = symbol + currentState;
-        if (map.containsKey(neededKey)) {
-            return map.get(neededKey);
+        if (this.map.containsKey(neededKey)) {
+            return this.map.get(neededKey);
         } else {
+            if (currentState == "newLineDone") {
+                return new NewLineCommand();
+            }
             return new DefaultCommand();
         }
     }

@@ -9,21 +9,9 @@ import java.util.Map;
 
 public class State {
     /**
-     * Previous symbol.
-     */
-    private char previous = 0;
-    /**
      * Level of nesting.
      */
     private int level = 0;
-
-    /**
-     * To get previous symbol.
-     * @return previous symbol
-     */
-    public final char getPrevious() {
-        return previous;
-    }
 
     /**
      * To get level of nesting.
@@ -48,14 +36,6 @@ public class State {
     }
 
     /**
-     * To set previous symbol.
-     * @param previous previous symbol
-     */
-    public final void setPrevious(final char previous) {
-        this.previous = previous;
-    }
-
-    /**
      * Map of states.
      */
     private Map<String, String> map;
@@ -68,9 +48,26 @@ public class State {
         this.map.put("*multiLineComment", "afterAsterisk");
         this.map.put("*afterSlash", "multiLineComment");
         this.map.put("/default", "afterSlash");
+        this.map.put("/newLineDone", "afterSlash");
         this.map.put("/afterSlash", "lineComment");
         this.map.put("/afterAsterisk", "default");
-        this.map.put("\nlineComment", "default");
+        this.map.put("\nlineComment", "newLineDone");
+        this.map.put(";default", "newLineDone");
+        this.map.put("}default", "newLineDone");
+        this.map.put("\ndefault", "newLineDone");
+        this.map.put("{default", "newLineDone");
+        this.map.put(";newLineDone", "newLineDone");
+        this.map.put("}newLineDone", "newLineDone");
+        this.map.put("\nnewLineDone", "newLineDone");
+        this.map.put("{newLineDone", "newLineDone");
+        this.map.put("\"default", "string");
+        this.map.put("\"string", "default");
+        this.map.put("\\string", "escapeSequence");
+
+        this.map.put("afterSlash", "default");
+        this.map.put("afterAsterisk", "default");
+        this.map.put("newLineDone", "default");
+        this.map.put("escapeSequence", "string");
 
         this.currentState = "default";
     }
@@ -82,13 +79,12 @@ public class State {
     public final void updateState(final char symbol) {
         String neededKey = symbol + this.currentState;
         if (this.map.containsKey(neededKey)) {
-            if ((this.currentState == "afterSlash")
-                    && (this.currentState == "afterAsterisk")) {
-                this.currentState = "default";
-            } else {
                 this.currentState = this.map.get(neededKey);
+            } else {
+                if (this.map.containsKey(this.currentState)) {
+                    this.currentState = this.map.get(this.currentState);
+                }
             }
-        }
     }
 
     /**

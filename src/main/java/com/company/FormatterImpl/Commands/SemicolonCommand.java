@@ -14,6 +14,5 @@ public class SemicolonCommand implements ICommand {
                         final State state) throws WriteException {
         destination.write(symbol);
         destination.write('\n');
-        state.setPrevious(symbol);
     }
 }

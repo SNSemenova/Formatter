@@ -8,12 +8,11 @@ import com.company.FormatterImpl.State;
 /**
  * Implementation for interface ICommand.
  */
-public class CloseBracketCommand implements ICommand {
+public class NewLineCloseBracketCommand implements ICommand {
     @Override
     public final void execute(final IDestination destination,
                               final char symbol, final State state)
             throws WriteException {
-        destination.write('\n');
         state.decrementLevel();
         for (int i = 0; i < state.getLevel(); i++) {
             destination.write("    ");
