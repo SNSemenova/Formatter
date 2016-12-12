@@ -1,4 +1,4 @@
 /**
  * Formatter classes.
  */
-package com.company.FormatterImpl;
+package com.company.formatterImpl;

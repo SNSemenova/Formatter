@@ -1,4 +1,4 @@
 /**
  * Input and output for string.
  */
-package com.company.StringIO;
+package com.company.stringIO;

@@ -1,9 +1,9 @@
 package FileIO;
 
-import com.company.Core.*;
-import com.company.FileIO.FileDestination;
-import com.company.FileIO.FileSource;
-import com.company.FormatterImpl.Formatter;
+import com.company.core.*;
+import com.company.fileIO.FileDestination;
+import com.company.fileIO.FileSource;
+import com.company.formatterImpl.Formatter;
 import org.junit.Before;
 import org.junit.Test;
 

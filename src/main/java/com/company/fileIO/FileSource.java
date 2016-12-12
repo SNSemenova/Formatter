@@ -1,7 +1,7 @@
-package com.company.FileIO;
+package com.company.fileIO;
 
-import com.company.Core.ISource;
-import com.company.Core.ReadException;
+import com.company.core.ISource;
+import com.company.core.ReadException;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -44,8 +44,6 @@ public class FileSource implements ISource {
             throw new ReadException(e);
         }
     }
-
-
 
     @Override
     public final char read() throws ReadException {

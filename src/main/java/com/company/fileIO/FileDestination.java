@@ -1,7 +1,7 @@
-package com.company.FileIO;
+package com.company.fileIO;
 
-import com.company.Core.IDestination;
-import com.company.Core.WriteException;
+import com.company.core.IDestination;
+import com.company.core.WriteException;
 
 import java.io.File;
 import java.io.FileWriter;

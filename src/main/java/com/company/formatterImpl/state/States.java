@@ -1,4 +1,4 @@
-package com.company.formatterImpl;
+package com.company.formatterImpl.state;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,7 @@ public class States {
     /**
      * Method for creating object States.
      */
-    States() {
+    public States() {
         this.map = new HashMap<String, SimpleState>();
         this.map.put("*multiLineComment", new SimpleState("afterAsterisk"));
         this.map.put("*afterSlash", new SimpleState("multiLineComment"));

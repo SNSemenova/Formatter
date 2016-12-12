@@ -1,15 +1,15 @@
 package com.company;
 
 
-import com.company.Core.IFormatter;
-import com.company.Core.IDestination;
-import com.company.Core.FormatException;
-import com.company.Core.ISource;
-import com.company.Core.ReadException;
-import com.company.Core.WriteException;
-import com.company.FileIO.FileDestination;
-import com.company.FileIO.FileSource;
-import com.company.FormatterImpl.Formatter;
+import com.company.core.IFormatter;
+import com.company.core.IDestination;
+import com.company.core.FormatException;
+import com.company.core.ISource;
+import com.company.core.ReadException;
+import com.company.core.WriteException;
+import com.company.fileIO.FileDestination;
+import com.company.fileIO.FileSource;
+import com.company.formatterImpl.Formatter;
 
 /**
  *Launches formatter.
@@ -31,12 +31,7 @@ public final class Main {
     public static void main(final String[] args)
             throws FormatException, ReadException, WriteException {
         ISource source = new FileSource(args[0]);
-        IDestination destination = null;
-        try {
-            destination = new FileDestination(args[1]);
-        } catch (WriteException e) {
-            throw new WriteException(e);
-        }
+        IDestination destination = new FileDestination(args[1]);
         IFormatter formatter = new Formatter();
         formatter.format(source, destination);
         source.close();

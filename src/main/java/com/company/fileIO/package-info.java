@@ -1,4 +1,4 @@
 /**
  * Input and output for file.
  */
-package com.company.FileIO;
+package com.company.fileIO;

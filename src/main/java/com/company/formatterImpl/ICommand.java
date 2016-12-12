@@ -1,7 +1,8 @@
-package com.company.FormatterImpl;
+package com.company.formatterImpl;
 
-import com.company.Core.IDestination;
-import com.company.Core.WriteException;
+import com.company.core.IDestination;
+import com.company.core.WriteException;
+import com.company.formatterImpl.state.States;
 
 /**
  *  Interface for commands.
@@ -12,9 +13,11 @@ public interface ICommand {
      * @param destination for writing result of formatting
      * @param symbol current symbol for formatting
      * @param state state of formatter
+     * @param indent spaces for formatting
      * @throws WriteException when symbol can't be read
      */
-    void execute(IDestination destination, char symbol, State state)
+    void execute(IDestination destination, char symbol,
+                 States state, Indent indent)
             throws WriteException;
 }
 

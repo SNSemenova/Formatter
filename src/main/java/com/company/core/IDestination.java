@@ -1,4 +1,4 @@
-package com.company.Core;
+package com.company.core;
 
 /**
  * Interface of destinations for formatting result.

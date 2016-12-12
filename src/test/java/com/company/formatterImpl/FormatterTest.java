@@ -1,9 +1,9 @@
 package FormatterImpl;
 
-import com.company.Core.*;
-import com.company.FormatterImpl.Formatter;
-import com.company.StringIO.StringDestination;
-import com.company.StringIO.StringSource;
+import com.company.core.*;
+import com.company.formatterImpl.Formatter;
+import com.company.stringIO.StringDestination;
+import com.company.stringIO.StringSource;
 import org.junit.Before;
 import org.junit.Test;
 

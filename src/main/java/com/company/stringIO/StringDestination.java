@@ -1,6 +1,6 @@
-package com.company.StringIO;
+package com.company.stringIO;
 
-import com.company.Core.IDestination;
+import com.company.core.IDestination;
 
 /**
  * Class for working with string in

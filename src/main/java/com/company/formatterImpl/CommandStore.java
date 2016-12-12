@@ -1,13 +1,13 @@
-package com.company.FormatterImpl;
+package com.company.formatterImpl;
 
 
-import com.company.FormatterImpl.Commands.CloseBracketCommand;
-import com.company.FormatterImpl.Commands.DefaultCommand;
-import com.company.FormatterImpl.Commands.OpenBracketCommand;
-import com.company.FormatterImpl.Commands.SemicolonCommand;
-import com.company.FormatterImpl.Commands.NewLineCloseBracketCommand;
-import com.company.FormatterImpl.Commands.DoNothingCommand;
-import com.company.FormatterImpl.Commands.NewLineCommand;
+import com.company.formatterImpl.commands.CloseBracketCommand;
+import com.company.formatterImpl.commands.DefaultCommand;
+import com.company.formatterImpl.commands.OpenBracketCommand;
+import com.company.formatterImpl.commands.SemicolonCommand;
+import com.company.formatterImpl.commands.NewLineCloseBracketCommand;
+import com.company.formatterImpl.commands.DoNothingCommand;
+import com.company.formatterImpl.commands.NewLineCommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +47,8 @@ public class CommandStore {
         this.map.put("}newLineDone", new NewLineCloseBracketCommand());
         this.map.put(";newLineDone", new SemicolonCommand());
         this.map.put("\nnewLineDone", new DoNothingCommand());
+
+        this.map.put("newLineDone", new NewLineCommand());
     }
 
     /**
@@ -60,12 +62,11 @@ public class CommandStore {
         String neededKey = symbol + currentState;
         if (this.map.containsKey(neededKey)) {
             return this.map.get(neededKey);
-        } else {
-            if (currentState == "newLineDone") {
-                return new NewLineCommand();
-            }
-            return new DefaultCommand();
         }
+        if (this.map.containsKey(currentState)) {
+            return this.map.get(currentState);
+        }
+        return new DefaultCommand();
     }
 }
 

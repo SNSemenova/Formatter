@@ -1,7 +1,7 @@
-package com.company.StringIO;
+package com.company.stringIO;
 
-import com.company.Core.ISource;
-import com.company.Core.ReadException;
+import com.company.core.ISource;
+import com.company.core.ReadException;
 
 /**
  * Implements ISource with string.

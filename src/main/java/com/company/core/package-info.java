@@ -1,4 +1,4 @@
 /**
  * Package for core files.
  */
-package com.company.Core;
+package com.company.core;

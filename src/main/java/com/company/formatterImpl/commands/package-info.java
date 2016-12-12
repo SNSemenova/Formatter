@@ -1,4 +1,4 @@
 /**
  * Package of commands.
  */
-package com.company.FormatterImpl.Commands;
+package com.company.formatterImpl.commands;

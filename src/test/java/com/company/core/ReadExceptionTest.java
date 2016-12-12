@@ -1,8 +1,6 @@
-package Core;
+package com.company.core;
 
-import com.company.Core.ISource;
-import com.company.Core.ReadException;
-import com.company.StringIO.StringSource;
+import com.company.stringIO.StringSource;
 import org.junit.Before;
 import org.junit.Test;
 

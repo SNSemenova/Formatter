@@ -1,9 +1,9 @@
-import com.company.Core.WriteException;
+import com.company.core.WriteException;
 import com.company.Main;
-import com.company.Core.IDestination;
-import com.company.StringIO.StringDestination;
-import com.company.Core.FormatException;
-import com.company.Core.ReadException;
+import com.company.core.IDestination;
+import com.company.stringIO.StringDestination;
+import com.company.core.FormatException;
+import com.company.core.ReadException;
 import org.junit.Before;
 import org.junit.Test;
 

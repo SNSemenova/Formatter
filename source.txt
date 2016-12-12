@@ -1,7 +1,7 @@
 public static void main(final String[] args) throws FormatException, ReadException {
 ISource source = new FileSource(args[0]);
 IDestination destination = null;try {destination = new FileDestination(args[1]);
-} catch (FileNotFoundException e) {
+}catch (FileNotFoundException e) {
 e.printStackTrace();}
 //{one-line; comment}
 IFormatter formatter = new Formatter();
