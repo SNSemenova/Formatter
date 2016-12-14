@@ -54,12 +54,12 @@ public class CommandStore {
     /**
      * Method for getting current handler.
      * @param currentState current state of formatter
-     * @param symbol symbol for formatting
+     * @param lexeme string for formatting
      * @return handler for formatter
      */
     public final ICommand getCommand(final String currentState,
-                                     final char symbol) {
-        String neededKey = symbol + currentState;
+                                     final String lexeme) {
+        String neededKey = lexeme + currentState;
         if (this.map.containsKey(neededKey)) {
             return this.map.get(neededKey);
         }

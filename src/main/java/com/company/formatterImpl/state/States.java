@@ -60,10 +60,10 @@ public class States {
 
     /**
      * Function of setting new state.
-     * @param symbol symbol from the source
+     * @param lexeme symbol from the source
      */
-    public final void updateState(final char symbol) {
-        String neededKey = symbol + this.currentState.toString();
+    public final void updateState(final String lexeme) {
+        String neededKey = lexeme + this.currentState.toString();
         if (this.map.containsKey(neededKey)) {
                 this.currentState = this.map.get(neededKey);
             } else {

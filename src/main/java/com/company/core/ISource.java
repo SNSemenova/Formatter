@@ -2,8 +2,9 @@ package com.company.core;
 
 /**
  * Interface of source for formatter.
+ * @param <T> returning type of reading
  */
-public interface ISource {
+public interface ISource<T> {
     /**
      * Returns <code>true</code> if the next symbol exists
      * and <code>false</code> otherwise.
@@ -18,7 +19,7 @@ public interface ISource {
      * @return next symbol
      * @throws ReadException when next symbol can't be read
      */
-    char read() throws ReadException;
+    T read() throws ReadException;
 
     /**
      * Closes a com.company.source.

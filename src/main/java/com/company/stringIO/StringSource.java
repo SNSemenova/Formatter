@@ -6,7 +6,7 @@ import com.company.core.ReadException;
 /**
  * Implements ISource with string.
  */
-public class StringSource implements ISource {
+public class StringSource implements ISource<Character> {
     /**
      * The string of source.
      */
@@ -30,7 +30,7 @@ public class StringSource implements ISource {
     }
 
     @Override
-    public final char read() throws ReadException {
+    public final Character read() throws ReadException {
         try {
             return this.source.charAt(this.current++);
         } catch (Exception e) {

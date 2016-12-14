@@ -8,7 +8,7 @@ import org.junit.Test;
  * Test for ReadException.
  */
 public class ReadExceptionTest {
-    private ISource source;
+    private ISource<Character> source;
 
     @Before
     public void setUp() {

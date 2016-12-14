@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Implements ISource with char file.
  */
-public class FileSource implements ISource {
+public class FileSource implements ISource<Character> {
 
     /**
      * Reader for file.
@@ -46,7 +46,7 @@ public class FileSource implements ISource {
     }
 
     @Override
-    public final char read() throws ReadException {
+    public final Character read() throws ReadException {
         try {
             return ((char) current);
         } catch (Exception e) {

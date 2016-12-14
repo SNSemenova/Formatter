@@ -11,10 +11,11 @@ import com.company.formatterImpl.state.States;
  */
 public class DefaultCommand implements ICommand {
     @Override
-    public final void execute(final IDestination destination, final char symbol,
-                              final States state, final Indent indent)
+    public final void execute(final IDestination destination,
+                              final String lexeme, final States state,
+                              final Indent indent)
             throws WriteException {
-        destination.write(symbol);
+        destination.write(lexeme);
 
     }
 }
