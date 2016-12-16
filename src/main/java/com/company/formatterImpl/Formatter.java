@@ -1,13 +1,8 @@
 package com.company.formatterImpl;
 
 
-import com.company.core.FormatException;
-import com.company.core.IDestination;
-import com.company.core.IFormatter;
-import com.company.core.ISource;
-import com.company.core.WriteException;
-import com.company.core.ReadException;
-import com.company.formatterImpl.lexer.Token;
+import com.company.core.*;
+import com.company.formatterImpl.lexer.IToken;
 import com.company.formatterImpl.state.States;
 
 /**
@@ -15,7 +10,7 @@ import com.company.formatterImpl.state.States;
  */
 public class Formatter implements IFormatter {
     @Override
-    public final void format(final ISource<Token> source,
+    public final void format(final ISource<IToken> source,
                              final IDestination destination)
             throws FormatException {
         States state = new States();
@@ -23,7 +18,7 @@ public class Formatter implements IFormatter {
         Indent indent = new Indent();
         try {
             while (source.hasNext()) {
-                Token token = source.read();
+                IToken token = source.read();
                 String lexeme = token.getLexeme();
                 ICommand command =
                         options.getCommand(state.getCurrentState(), lexeme);

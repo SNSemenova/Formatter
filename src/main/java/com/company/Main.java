@@ -1,16 +1,11 @@
 package com.company;
 
 
-import com.company.core.IFormatter;
-import com.company.core.IDestination;
-import com.company.core.FormatException;
-import com.company.core.ISource;
-import com.company.core.ReadException;
-import com.company.core.WriteException;
+import com.company.core.*;
 import com.company.fileIO.FileDestination;
 import com.company.fileIO.FileSource;
 import com.company.formatterImpl.Formatter;
-import com.company.formatterImpl.lexer.Token;
+import com.company.formatterImpl.lexer.IToken;
 import com.company.formatterImpl.lexer.Lexer;
 
 /**
@@ -33,7 +28,7 @@ public final class Main {
     public static void main(final String[] args)
             throws FormatException, ReadException, WriteException {
         ISource<Character> source = new FileSource(args[0]);
-        ISource<Token> lexer = new Lexer(source);
+        ISource<IToken> lexer = new Lexer(source);
         IDestination destination = new FileDestination(args[1]);
         IFormatter formatter = new Formatter();
         formatter.format(lexer, destination);

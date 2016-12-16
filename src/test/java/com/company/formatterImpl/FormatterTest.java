@@ -1,7 +1,8 @@
-package FormatterImpl;
+package com.company.formatterImpl;
 
 import com.company.core.*;
-import com.company.formatterImpl.Formatter;
+import com.company.formatterImpl.lexer.IToken;
+import com.company.formatterImpl.lexer.Lexer;
 import com.company.stringIO.StringDestination;
 import com.company.stringIO.StringSource;
 import org.junit.Before;
@@ -23,45 +24,50 @@ public class FormatterTest {
 
     @Test
     public void testString() throws FormatException, WriteException {
-        ISource source = new StringSource("a{qwer{ty;}}");
+        ISource<Character> source = new StringSource("a{qwer{ty;}}abc");
+        ISource<IToken> lexeme = new Lexer(source);
         IDestination destination = new StringDestination();
-        formatter.format(source, destination);
-        assertEquals("a{\n    qwer{\n        ty;\n    }\n}\n",
+        formatter.format(lexeme, destination);
+        assertEquals("a{\n    qwer{\n        ty;\n    }\n}\nabc",
                 destination.toString());
     }
 
     @Test
     public void bracketsFormat() throws FormatException, WriteException {
-        ISource source = new StringSource("{f{a}}");
+        ISource<Character> source = new StringSource("{f{a}}abc");
+        ISource<IToken> lexeme = new Lexer(source);
         IDestination destination = new StringDestination();
-        formatter.format(source, destination);
-        assertEquals("{\n    f{\n        a\n    }\n}\n",
+        formatter.format(lexeme, destination);
+        assertEquals("{\n    f{\n        a\n    }\n}\nabc",
                 destination.toString());
     }
 
     @Test
     public void commentFormat() throws FormatException, WriteException {
-        ISource source = new StringSource("//{;}\n/*{\n;}*/");
+        ISource<Character> source = new StringSource("//{;}\n/*{\n;}*/;abc");
+        ISource<IToken> lexeme = new Lexer(source);
         IDestination destination = new StringDestination();
-        formatter.format(source, destination);
-        assertEquals("//{;}\n/*{\n;}*/",
+        formatter.format(lexeme, destination);
+        assertEquals("//{;}\n/*{\n;}*/;\nabc",
                 destination.toString());
     }
 
     @Test
     public void semicolonFormat() throws FormatException, WriteException {
-        ISource source = new StringSource(";;");
+        ISource<Character> source = new StringSource(";;abc");
+        ISource<IToken> lexeme = new Lexer(source);
         IDestination destination = new StringDestination();
-        formatter.format(source, destination);
-        assertEquals(";\n;\n",
+        formatter.format(lexeme, destination);
+        assertEquals(";\n;\nabc",
                 destination.toString());
     }
 
     @Test
     public void lineBreakFormat() throws FormatException {
-        ISource source = new StringSource("\n}\n");
+        ISource<Character> source = new StringSource("\n}\n");
+        ISource<IToken> lexeme = new Lexer(source);
         IDestination destination = new StringDestination();
-        formatter.format(source, destination);
+        formatter.format(lexeme, destination);
         assertEquals("\n}\n",
                 destination.toString());
     }

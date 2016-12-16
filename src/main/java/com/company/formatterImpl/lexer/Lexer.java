@@ -6,7 +6,7 @@ import com.company.core.ReadException;
 /**
  * Implementation of ISource.
  */
-public class Lexer implements ISource<Token> {
+public class Lexer implements ISource<IToken> {
     /**
      * Reading source.
      */
@@ -19,6 +19,15 @@ public class Lexer implements ISource<Token> {
      * Read character.
      */
     private Character c;
+
+    /**
+     * States for lexer.
+     */
+    private LexerStates states = new LexerStates();
+    /**
+     * Tokens for lexer.
+     */
+    private Tokens tokens = new Tokens();
 
     /**
      * Initialization of Lexer.
@@ -34,30 +43,91 @@ public class Lexer implements ISource<Token> {
     }
 
     @Override
-    public final Token read() throws ReadException {
+    public final IToken read() throws ReadException {
         String string = "";
-        if (c != null) {
-            lexeme.append(c);
-            string = lexeme.toString();
-            lexeme.setLength(0);
-            c = source.read();
-            return new Token(string);
+        if (lexeme.length() != 0) {
+            if (tokens.hasLexeme(lexeme.toString())) {
+                string = lexeme.toString();
+                lexeme.setLength(0);
+                if (c != null) {
+                    lexeme.append(c);
+                }
+                c = source.read();
+                states.updateState(c);
+                return tokens.getToken(string);
+            }
         }
-        c = source.read();
-        while (source.hasNext()) {
-            if (c != null) {
-                lexeme.append(c);
+        if (c != null) {
+            if (states.getCurrentState().equals("newLexeme")) {
+                if (lexeme.length() != 0) {
+                    string = lexeme.toString();
+                    lexeme.setLength(0);
+                    lexeme.append(c);
+                    c = source.read();
+                    states.updateState(c);
+                    return new Token(string);
+                }
+            }
+            lexeme.append(c);
+            if (tokens.hasLexeme(lexeme.toString())) {
                 string = lexeme.toString();
                 lexeme.setLength(0);
                 c = source.read();
-                return new Token(string);
+                states.updateState(c);
+                return tokens.getToken(string);
+            } else {
+                c = source.read();
+            }
+        } else {
+            c = source.read();
+        }
+        states.updateState(c);
+        while (source.hasNext()) {
+            if (c != null) {
+                if (states.getCurrentState().equals("newLexeme")) {
+                    if (lexeme.length() != 0) {
+                        string = lexeme.toString();
+                        lexeme.setLength(0);
+                        lexeme.append(c);
+                        c = source.read();
+                        states.updateState(c);
+                        return new Token(string);
+                    }
+                }
+                lexeme.append(c);
+                if (tokens.hasLexeme(lexeme.toString())) {
+                    string = lexeme.toString();
+                    lexeme.setLength(0);
+                    c = source.read();
+                    states.updateState(c);
+                    return tokens.getToken(string);
+                }
             }
             c = source.read();
+            states.updateState(c);
+            if (states.getCurrentState().equals("newLexeme")) {
+                if (lexeme.length() != 0) {
+                    string = lexeme.toString();
+                    lexeme.setLength(0);
+                    lexeme.append(c);
+                    c = null;
+                    return new Token(string);
+                }
+            }
             lexeme.append(c);
+            if (tokens.hasLexeme(lexeme.toString())) {
+                string = lexeme.toString();
+                lexeme.setLength(0);
+                c = null;
+                return tokens.getToken(string);
+            }
             c = null;
+        }
+        if (c != null) {
+            lexeme.append(c);
+        }
+        if (lexeme.length() != 0) {
             string = lexeme.toString();
-            lexeme.setLength(0);
-            return new Token(string);
         }
         return new Token(string);
     }

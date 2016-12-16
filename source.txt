@@ -4,9 +4,10 @@ IDestination destination = null;try {destination = new FileDestination(args[1]);
 }catch (FileNotFoundException e) {
 e.printStackTrace();}
 //{one-line; comment}
-IFormatter formatter = new Formatter();
-formatter.format(source, destination);
+IFormatter matter = new Formatter();
+matter.mat(source, destination);
 source.close();/*multi{line
 com;ment}*/
+for (i=0; i < N; i++) {
 destination.close();
-}
+}}

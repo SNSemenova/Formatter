@@ -31,12 +31,11 @@ public class States {
      */
     public States() {
         this.map = new HashMap<String, SimpleState>();
-        this.map.put("*multiLineComment", new SimpleState("afterAsterisk"));
-        this.map.put("*afterSlash", new SimpleState("multiLineComment"));
-        this.map.put("/default", new SimpleState("afterSlash"));
-        this.map.put("/newLineDone", new SimpleState("afterSlash"));
-        this.map.put("/afterSlash", new SimpleState("lineComment"));
-        this.map.put("/afterAsterisk", new SimpleState("default"));
+        this.map.put("/*default", new SimpleState("multiLineComment"));
+        this.map.put("/*newLineDone", new SimpleState("multiLineComment"));
+        this.map.put("//default", new SimpleState("lineComment"));
+        this.map.put("//newLineDone", new SimpleState("lineComment"));
+        this.map.put("*/multiLineComment", new SimpleState("default"));
         this.map.put("\nlineComment", new SimpleState("newLineDone"));
         this.map.put(";default", new SimpleState("newLineDone"));
         this.map.put("}default", new SimpleState("newLineDone"));
@@ -49,6 +48,9 @@ public class States {
         this.map.put("\"default", new SimpleState("string"));
         this.map.put("\"string", new SimpleState("default"));
         this.map.put("\\string", new SimpleState("escapeSequence"));
+        this.map.put("fordefault", new SimpleState("forCondition"));
+        this.map.put("fornewLineDone", new SimpleState("forCondition"));
+        this.map.put(")forCondition", new SimpleState("default"));
 
         this.map.put("afterSlash", new SimpleState("default"));
         this.map.put("afterAsterisk", new SimpleState("default"));
