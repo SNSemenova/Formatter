@@ -7,8 +7,14 @@ import java.util.Map;
  * Tokens.
  */
 public class Tokens {
+    /**
+     * Map for special tokens.
+     */
     private Map<String, IToken> map = null;
 
+    /**
+     * Initialisation of exemplar.
+     */
     public Tokens() {
         this.map = new HashMap<String, IToken>();
         this.map.put("{", new Token("{"));
@@ -23,11 +29,21 @@ public class Tokens {
         this.map.put(")", new Token(")"));
     }
 
-    public boolean hasLexeme(String s) {
+    /**
+     * Checks if gotten string is a special lexeme.
+     * @param s string of lexeme
+     * @return true if gotten string is a special lexeme
+     */
+    public final boolean hasLexeme(final String s) {
         return this.map.containsKey(s);
     }
 
-    public IToken getToken(String s) {
+    /**
+     * Gets token.
+     * @param s string of lexeme
+     * @return token
+     */
+    public final IToken getToken(final String s) {
         return this.map.get(s);
     }
 }

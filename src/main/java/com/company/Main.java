@@ -1,7 +1,11 @@
 package com.company;
 
-
-import com.company.core.*;
+import com.company.core.FormatException;
+import com.company.core.ISource;
+import com.company.core.IDestination;
+import com.company.core.IFormatter;
+import com.company.core.ReadException;
+import com.company.core.WriteException;
 import com.company.fileIO.FileDestination;
 import com.company.fileIO.FileSource;
 import com.company.formatterImpl.Formatter;

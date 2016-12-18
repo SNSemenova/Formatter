@@ -71,5 +71,15 @@ public class FormatterTest {
         assertEquals("\n}\n",
                 destination.toString());
     }
+
+    @Test
+    public void forFormat() throws FormatException {
+        ISource<Character> source = new StringSource("for(i=0; i<N; i++) j=i");
+        ISource<IToken> lexeme = new Lexer(source);
+        IDestination destination = new StringDestination();
+        formatter.format(lexeme, destination);
+        assertEquals("for(i=0; i<N; i++) j=i",
+                destination.toString());
+    }
 }
 
