@@ -66,13 +66,13 @@ public class States {
      */
     public final void updateState(final String lexeme) {
         String neededKey = lexeme + this.currentState.toString();
-        if (this.map.containsKey(neededKey)) {
-                this.currentState = this.map.get(neededKey);
-            } else {
-                if (this.map.containsKey(this.currentState.toString())) {
-                    this.currentState
-                            = this.map.get(this.currentState.toString());
-                }
-            }
+        IState newState = null;
+        newState = this.map.get(neededKey);
+        if (newState == null) {
+            newState = this.map.get(this.currentState.toString());
+        }
+        if (newState != null) {
+            this.currentState = newState;
+        }
     }
 }

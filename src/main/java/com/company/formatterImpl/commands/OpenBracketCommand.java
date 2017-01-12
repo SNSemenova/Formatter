@@ -4,7 +4,6 @@ import com.company.core.IDestination;
 import com.company.core.WriteException;
 import com.company.formatterImpl.ICommand;
 import com.company.formatterImpl.Indent;
-import com.company.formatterImpl.state.States;
 
 /**
  * Implementation for interface ICommand.
@@ -13,8 +12,7 @@ public class OpenBracketCommand implements ICommand {
 
     @Override
     public final void execute(final IDestination destination,
-                              final String lexeme, final States state,
-                              final Indent indent)
+                              final String lexeme, final Indent indent)
             throws WriteException {
             destination.write(lexeme);
             indent.incrementLevel();

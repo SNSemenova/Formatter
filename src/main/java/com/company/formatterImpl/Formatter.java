@@ -26,7 +26,7 @@ public class Formatter implements IFormatter {
                 String lexeme = token.getLexeme();
                 ICommand command =
                         options.getCommand(state.getCurrentState(), lexeme);
-                command.execute(destination, lexeme, state, indent);
+                command.execute(destination, lexeme, indent);
                 state.updateState(lexeme);
             }
         } catch (ReadException e) {
