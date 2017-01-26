@@ -7,7 +7,7 @@ public class Indent {
     /**
      * Level of nesting.
      */
-    private int level = 0;
+    private int level;
 
     /**
      * Plus one to level.

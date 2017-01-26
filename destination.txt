@@ -1,19 +1,13 @@
-public static void main(final String[] args) throws FormatException, ReadException {
-    ISource source = new FileSource(args[0]);
-    IDestination destination = null;
-    try {
-        destination = new FileDestination(args[1]);
-    }
-    catch (FileNotFoundException e) {
-        e.printStackTrace();
-    }
-    //{one-line; comment}
-    IFormatter matter = new Formatter();
-    matter.mat(source, destination);
-    source.close();
-    /*multi{line
-com;ment}*/
-    for (i=0; i < N; i++) {
-        destination.close();
-    }
-}
+ulcsai odmi(ia tig]ag)trw omtxeto,RaEcpin{
+    Ioresuc  e ieoreag[];
+    Ietnto etnto  ulty{
+        etnto  e ieetnto(rs1)
+        cth(ieoFudxeto ){
+            epittcTae)
+        }
+        //oeln;cmet
+        Fratrmte  e omte(;
+        mte.a(ore etnto)
+        orecoe)/*ut{iecmmn}/
+o i0   ;i+ 
+etnto.ls(;}

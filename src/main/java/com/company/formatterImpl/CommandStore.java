@@ -22,24 +22,32 @@ public class CommandStore {
     private Map<String, ICommand> map;
 
     /**
+     * Instance of indent.
+     */
+    private Indent indent;
+
+    /**
      * Creates the map.
      */
     public CommandStore() {
-        this.map = new HashMap<String, ICommand>();
-        this.map.put("{default", new OpenBracketCommand());
-        this.map.put("{afterAsterisk", new OpenBracketCommand());
-        this.map.put("{afterSlash", new OpenBracketCommand());
-        this.map.put("}afterAsterisk", new CloseBracketCommand());
-        this.map.put("}afterSlash", new CloseBracketCommand());
-        this.map.put("}default", new CloseBracketCommand());
-        this.map.put(";afterAsterisk", new SemicolonCommand());
-        this.map.put(";afterSlash", new SemicolonCommand());
-        this.map.put(";default", new SemicolonCommand());
-        this.map.put("}newLineDone", new NewLineCloseBracketCommand());
-        this.map.put(";newLineDone", new SemicolonCommand());
-        this.map.put("\nnewLineDone", new DoNothingCommand());
+        indent = new Indent();
 
-        this.map.put("newLineDone", new NewLineCommand());
+        this.map = new HashMap<String, ICommand>();
+        this.map.put("{default", new OpenBracketCommand(indent));
+        this.map.put("{afterAsterisk", new OpenBracketCommand(indent));
+        this.map.put("{afterSlash", new OpenBracketCommand(indent));
+        this.map.put("}afterAsterisk", new CloseBracketCommand(indent));
+        this.map.put("}afterSlash", new CloseBracketCommand(indent));
+        this.map.put("}default", new CloseBracketCommand(indent));
+        this.map.put(";afterAsterisk", new SemicolonCommand(indent));
+        this.map.put(";afterSlash", new SemicolonCommand(indent));
+        this.map.put(";default", new SemicolonCommand(indent));
+        this.map.put("}newLineDone", new NewLineCloseBracketCommand(indent));
+        this.map.put(";newLineDone", new SemicolonCommand(indent));
+        this.map.put("\nnewLineDone", new DoNothingCommand(indent));
+
+        this.map.put("newLineDone", new NewLineCommand(indent));
+
     }
 
     /**
@@ -57,7 +65,7 @@ public class CommandStore {
         if (this.map.containsKey(currentState)) {
             return this.map.get(currentState);
         }
-        return new DefaultCommand();
+        return new DefaultCommand(indent);
     }
 }
 

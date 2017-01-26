@@ -33,17 +33,10 @@ public class LexerStates {
      */
     public LexerStates() {
         this.map = new HashMap<String, SimpleState>();
-        this.map.put("/default", new SimpleState("lexemeStart"));
-        this.map.put("*default", new SimpleState("lexemeStart"));
-        this.map.put("{default", new SimpleState("newLexeme"));
-        this.map.put("{newLexeme", new SimpleState("newLexeme"));
-        this.map.put(")default", new SimpleState("newLexeme"));
-        this.map.put(")newLexeme", new SimpleState("newLexeme"));
-        this.map.put("}default", new SimpleState("newLexeme"));
-        this.map.put("}newLexeme", new SimpleState("newLexeme"));
-        this.map.put(";default", new SimpleState("newLexeme"));
-        this.map.put(";newLexeme", new SimpleState("newLexeme"));
+        this.map.put("/default", new SimpleState("newLexeme"));
+        this.map.put("*default", new SimpleState("newLexeme"));
         this.map.put("fdefault", new SimpleState("newLexeme"));
+        this.map.put("onewLexeme", new SimpleState("newLexeme"));
 
         this.currentState = new SimpleState("default");
     }

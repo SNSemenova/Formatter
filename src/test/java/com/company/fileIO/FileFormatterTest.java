@@ -2,7 +2,6 @@ package com.company.fileIO;
 
 import com.company.core.*;
 import com.company.formatterImpl.Formatter;
-import com.company.formatterImpl.lexer.IToken;
 import com.company.formatterImpl.lexer.Lexer;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +25,7 @@ public class FileFormatterTest {
     @Test
     public void testFile() throws ReadException, WriteException, FormatException {
         ISource<Character> source = new FileSource("source.txt");
-        ISource<IToken> lexeme = new Lexer(source);
+        ISource<String> lexeme = new Lexer(source);
         IDestination destination = new FileDestination("destination.txt");
         formatter.format(lexeme, destination);
         source.close();

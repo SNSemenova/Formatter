@@ -1,6 +1,5 @@
 package com.company.formatterImpl.commands;
 
-import com.company.core.IDestination;
 import com.company.core.WriteException;
 import com.company.formatterImpl.ICommand;
 import com.company.formatterImpl.Indent;
@@ -9,13 +8,24 @@ import com.company.formatterImpl.Indent;
  * Implementation for interface ICommand.
  */
 public class OpenBracketCommand implements ICommand {
+    /**
+     * Instance of Indent.
+     */
+    private Indent indent;
 
+    /**
+     * Creates instance of ICommand implementation.
+     * @param indent instance of Indent
+     */
+    public OpenBracketCommand(final Indent indent) {
+        this.indent = indent;
+    }
     @Override
-    public final void execute(final IDestination destination,
-                              final String lexeme, final Indent indent)
+    public final String execute(final String lexeme)
             throws WriteException {
-            destination.write(lexeme);
-            indent.incrementLevel();
-            destination.write('\n');
+        String string = lexeme;
+        indent.incrementLevel();
+        string += '\n';
+        return string;
     }
 }

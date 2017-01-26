@@ -6,7 +6,7 @@ import com.company.core.ReadException;
 /**
  * Implementation of ISource.
  */
-public class Lexer implements ISource<IToken> {
+public class Lexer implements ISource<String> {
     /**
      * Reading source.
      */
@@ -24,10 +24,6 @@ public class Lexer implements ISource<IToken> {
      * States for lexer.
      */
     private LexerStates states = new LexerStates();
-    /**
-     * Tokens for lexer.
-     */
-    private Tokens tokens = new Tokens();
 
     /**
      * Initialization of Lexer.
@@ -43,93 +39,20 @@ public class Lexer implements ISource<IToken> {
     }
 
     @Override
-    public final IToken read() throws ReadException {
+    public final String read() throws ReadException {
         String string = "";
-        if (lexeme.length() != 0) {
-            if (tokens.hasLexeme(lexeme.toString())) {
-                string = lexeme.toString();
-                lexeme.setLength(0);
-                if (c != null) {
-                    lexeme.append(c);
-                }
-                c = source.read();
-                states.updateState(c);
-                return tokens.getToken(string);
-            }
-        }
-        if (c != null) {
-            if (states.getCurrentState().equals("newLexeme")) {
-                if (lexeme.length() != 0) {
-                    string = lexeme.toString();
-                    lexeme.setLength(0);
-                    lexeme.append(c);
-                    c = source.read();
-                    states.updateState(c);
-                    return new Token(string);
-                }
-            }
-            lexeme.append(c);
-            if (tokens.hasLexeme(lexeme.toString())) {
-                string = lexeme.toString();
-                lexeme.setLength(0);
-                c = source.read();
-                states.updateState(c);
-                return tokens.getToken(string);
-            } else {
-                c = source.read();
-            }
-        } else {
-            c = source.read();
-        }
-        states.updateState(c);
+        String newLexeme = null;
+        Handlers handlers = new Handlers();
         while (source.hasNext()) {
-            if (c != null) {
-                if (states.getCurrentState().equals("newLexeme")) {
-                    if (lexeme.length() != 0) {
-                        string = lexeme.toString();
-                        lexeme.setLength(0);
-                        lexeme.append(c);
-                        c = source.read();
-                        states.updateState(c);
-                        return new Token(string);
-                    }
-                }
-                lexeme.append(c);
-                if (tokens.hasLexeme(lexeme.toString())) {
-                    string = lexeme.toString();
-                    lexeme.setLength(0);
-                    c = source.read();
-                    states.updateState(c);
-                    return tokens.getToken(string);
-                }
-            }
             c = source.read();
             states.updateState(c);
-            if (states.getCurrentState().equals("newLexeme")) {
-                if (lexeme.length() != 0) {
-                    string = lexeme.toString();
-                    lexeme.setLength(0);
-                    lexeme.append(c);
-                    c = null;
-                    return new Token(string);
-                }
+            IHandler handler = handlers.getHandler(states.getCurrentState());
+            newLexeme = handler.execute(lexeme, c);
+            if (newLexeme != null) {
+                return newLexeme;
             }
-            lexeme.append(c);
-            if (tokens.hasLexeme(lexeme.toString())) {
-                string = lexeme.toString();
-                lexeme.setLength(0);
-                c = null;
-                return tokens.getToken(string);
-            }
-            c = null;
         }
-        if (c != null) {
-            lexeme.append(c);
-        }
-        if (lexeme.length() != 0) {
-            string = lexeme.toString();
-        }
-        return new Token(string);
+        return null;
     }
 
     @Override
