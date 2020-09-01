@@ -40,10 +40,9 @@ public class Lexer implements ISource<String> {
 
     @Override
     public final String read() throws ReadException {
-        String string = "";
         String newLexeme = null;
         Handlers handlers = new Handlers();
-        while (source.hasNext()) {
+        do {
             c = source.read();
             states.updateState(c);
             IHandler handler = handlers.getHandler(states.getCurrentState());
@@ -51,7 +50,7 @@ public class Lexer implements ISource<String> {
             if (newLexeme != null) {
                 return newLexeme;
             }
-        }
+        } while (source.hasNext());
         return null;
     }
 
